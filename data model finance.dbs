@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Fianince_data_explained" id="LogicalDesign-1cdf" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="Fianince_data_explained" >
+		<table name="CONTRACT" prior="Entity" >
+			<column name="MASTER_AGREEMENT" type="INT" jt="4" mandatory="y" />
+			<column name="CONTRACT_NAME" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_CONTRACT" unique="PRIMARY_KEY" >
+				<column name="MASTER_AGREEMENT" />
+				<column name="CONTRACT_NAME" />
+			</index>
+			<fk name="fk_CONTRACT_PURCHASE_ORDER" virtual="y" to_schema="Fianince_data_explained.INSTANCE" to_table="PURCHASE_ORDER" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="CONTRACT_NAME" pk="AWARD_DATE" />
+			</fk>
+		</table>
+		<table name="Comodity" prior="Com" >
+			<column name="COMMODITY" type="INT" jt="4" mandatory="y" />
+			<column name="COMMODITY_DESC" type="INT" jt="4" />
+			<index name="pk_Comodity" unique="PRIMARY_KEY" >
+				<column name="COMMODITY" />
+			</index>
+		</table>
+		<table name="ITEMS" prior="ITE" >
+			<column name="EXTENDED_DESC" type="INT" jt="4" mandatory="y" />
+			<column name="QUANTITY" type="DATE" jt="91" />
+			<column name="UNIT_OF_MEASURE" type="DATE" jt="91" />
+			<column name="UNIT_PRICE" type="DATE" jt="91" />
+			<column name="ITM_TOT_AM" type="DATE" jt="91" />
+			<index name="pk_ITEMS" unique="PRIMARY_KEY" >
+				<column name="EXTENDED_DESC" />
+			</index>
+		</table>
+		<table name="PURCHASE_ORDER" prior="PUR" >
+			<column name="PURCHASE_ORDER" type="INT" jt="4" mandatory="y" />
+			<column name="AWARD_DATE" type="DATE" jt="91" />
+			<column name="VENDOR_CODE" type="DATE" jt="91" />
+			<column name="MASTER_AGREEMENT" type="DATE" jt="91" />
+			<index name="pk_PURCHASE_ORDER" unique="PRIMARY_KEY" >
+				<column name="PURCHASE_ORDER" />
+			</index>
+			<index name="unq_AWARD_DATE" unique="UNIQUE_INDEX" >
+				<column name="AWARD_DATE" />
+			</index>
+		</table>
+		<table name="VENDOR" >
+			<column name="VENOR_CODE" type="INT" jt="4" mandatory="y" />
+			<column name="LGL-NM" type="INT" jt="4" />
+			<column name="AD_LN_1" type="INT" jt="4" />
+			<column name="AD_LN_2" type="INT" jt="4" />
+			<column name="CITY" type="INT" jt="4" />
+			<column name="ST" type="INT" jt="4" />
+			<column name="ZIP" type="INT" jt="4" />
+			<column name="CTRY" type="INT" jt="4" />
+			<index name="pk_VENDOR" unique="PRIMARY_KEY" >
+				<column name="VENOR_CODE" />
+			</index>
+			<fk name="fk_VENDOR_PURCHASE_ORDER" virtual="y" to_schema="Fianince_data_explained.INSTANCE" to_table="PURCHASE_ORDER" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="VENOR_CODE" pk="PURCHASE_ORDER" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-875" show_relation="columns" >
+		<entity schema="Fianince_data_explained.INSTANCE" name="CONTRACT" color="C1D8EE" x="340" y="374" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="Comodity" color="C1D8EE" x="340" y="204" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="ITEMS" color="C1D8EE" x="952" y="340" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="PURCHASE_ORDER" color="C1D8EE" x="680" y="340" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="VENDOR" color="C1D8EE" x="680" y="51" />
+		<callout x="51" y="51" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+	</layout>
+</project>
