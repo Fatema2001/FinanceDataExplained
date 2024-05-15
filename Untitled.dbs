@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Fianince_data_explained" id="GoogleBigQuery-19f4" database="GoogleBigQuery" >
+	<schema name="INSTANCE" catalogname="Fianince_data_explained" >
+		<table name="CONTRACT" >
+			<column name="MASTER_AGREEMENT" type="int64" jt="4" mandatory="y" />
+			<column name="CONTRACT_NAME" type="date" length="100" jt="91" mandatory="y" />
+			<index name="pk_CONTRACT" unique="PRIMARY_KEY" >
+				<column name="MASTER_AGREEMENT" />
+				<column name="CONTRACT_NAME" />
+			</index>
+			<fk name="fk_CONTRACT_PURCHASE_ORDER" virtual="y" to_schema="Fianince_data_explained.INSTANCE" to_table="PURCHASE_ORDER" >
+				<fk_column name="CONTRACT_NAME" pk="AWARD_DATE" />
+			</fk>
+		</table>
+		<table name="Comodity" >
+			<column name="COMMODITY" type="int64" jt="4" mandatory="y" />
+			<column name="COMMODITY_DESC" type="int64" jt="4" />
+			<index name="pk_Comodity" unique="PRIMARY_KEY" >
+				<column name="COMMODITY" />
+			</index>
+		</table>
+		<table name="ITEMS" >
+			<column name="EXTENDED_DESC" type="int64" jt="4" mandatory="y" />
+			<column name="QUANTITY" type="date" jt="91" />
+			<column name="UNIT_OF_MEASURE" type="date" jt="91" />
+			<column name="UNIT_PRICE" type="date" jt="91" />
+			<column name="ITM_TOT_AM" type="date" jt="91" />
+			<index name="pk_ITEMS" unique="PRIMARY_KEY" >
+				<column name="EXTENDED_DESC" />
+			</index>
+		</table>
+		<table name="PURCHASE_ORDER" >
+			<column name="PURCHASE_ORDER" type="int64" jt="4" mandatory="y" />
+			<column name="AWARD_DATE" type="date" jt="91" />
+			<column name="VENDOR_CODE" type="date" jt="91" />
+			<column name="MASTER_AGREEMENT" type="date" jt="91" />
+			<index name="pk_PURCHASE_ORDER" unique="PRIMARY_KEY" >
+				<column name="PURCHASE_ORDER" />
+			</index>
+			<index name="unq_AWARD_DATE" unique="UNIQUE_INDEX" >
+				<column name="AWARD_DATE" />
+			</index>
+		</table>
+		<table name="VENDOR" >
+			<column name="VENOR_CODE" type="int64" jt="4" mandatory="y" />
+			<column name="LGL-NM" type="int64" jt="4" />
+			<column name="AD_LN_1" type="int64" jt="4" />
+			<column name="AD_LN_2" type="int64" jt="4" />
+			<column name="CITY" type="int64" jt="4" />
+			<column name="ST" type="int64" jt="4" />
+			<column name="ZIP" type="int64" jt="4" />
+			<column name="CTRY" type="int64" jt="4" />
+			<index name="pk_VENDOR" unique="PRIMARY_KEY" >
+				<column name="VENOR_CODE" />
+			</index>
+			<fk name="fk_VENDOR_PURCHASE_ORDER" virtual="y" to_schema="Fianince_data_explained.INSTANCE" to_table="PURCHASE_ORDER" >
+				<fk_column name="VENOR_CODE" pk="PURCHASE_ORDER" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-674" confirmed="y" show_relation="columns" >
+		<entity schema="Fianince_data_explained.INSTANCE" name="CONTRACT" color="C1D8EE" x="340" y="374" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="Comodity" color="C1D8EE" x="340" y="204" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="ITEMS" color="C1D8EE" x="952" y="340" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="PURCHASE_ORDER" color="C1D8EE" x="680" y="340" />
+		<entity schema="Fianince_data_explained.INSTANCE" name="VENDOR" color="C1D8EE" x="680" y="51" />
+		<callout x="51" y="51" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+		<script name="SQL_Editor" id="Editor-17e0" language="SQL" >
+			<string><![CDATA[CREATE SCHEMA INSTANCE;
+
+CREATE TABLE Fianince_data_explained.INSTANCE.CONTRACT ( 
+	MASTER_AGREEMENT int64 NOT NULL  ,
+	CONTRACT_NAME date NOT NULL  
+ );
+
+ALTER TABLE Fianince_data_explained.INSTANCE.CONTRACT ADD PRIMARY KEY ( MASTER_AGREEMENT, CONTRACT_NAME )  NOT ENFORCED;
+
+CREATE TABLE Fianince_data_explained.INSTANCE.Comodity ( 
+	COMMODITY int64 NOT NULL  ,
+	COMMODITY_DESC int64  
+ );
+
+ALTER TABLE Fianince_data_explained.INSTANCE.Comodity ADD PRIMARY KEY ( COMMODITY )  NOT ENFORCED;
+
+CREATE TABLE Fianince_data_explained.INSTANCE.ITEMS ( 
+	EXTENDED_DESC int64 NOT NULL  ,
+	QUANTITY date  ,
+	UNIT_OF_MEASURE date  ,
+	UNIT_PRICE date  ,
+	ITM_TOT_AM date  
+ );
+
+ALTER TABLE Fianince_data_explained.INSTANCE.ITEMS ADD PRIMARY KEY ( EXTENDED_DESC )  NOT ENFORCED;
+
+CREATE TABLE Fianince_data_explained.INSTANCE.PURCHASE_ORDER ( 
+	PURCHASE_ORDER int64 NOT NULL  ,
+	AWARD_DATE date  ,
+	VENDOR_CODE date  ,
+	MASTER_AGREEMENT date  
+ );
+
+ALTER TABLE Fianince_data_explained.INSTANCE.PURCHASE_ORDER ADD PRIMARY KEY ( PURCHASE_ORDER )  NOT ENFORCED;
+
+CREATE TABLE Fianince_data_explained.INSTANCE.VENDOR ( 
+	VENOR_CODE int64 NOT NULL  ,
+	LGL-NM int64  ,
+	AD_LN_1 int64  ,
+	AD_LN_2 int64  ,
+	CITY int64  ,
+	ST int64  ,
+	ZIP int64  ,
+	CTRY int64  
+ );
+
+ALTER TABLE Fianince_data_explained.INSTANCE.VENDOR ADD PRIMARY KEY ( VENOR_CODE )  NOT ENFORCED;
+]]></string>
+		</script>
+	</layout>
+</project>
